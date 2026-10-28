@@ -63,12 +63,10 @@ export const metadata = {
     title,
     description,
     images: ["/og.png"]
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: { index: true, follow: true, "max-image-preview": "large" }
   }
+  // Crawler directives live on the home page, not here: a layout-level
+  // "index, follow" would be inherited by the 404 page and conflict with the
+  // "noindex" Next.js adds to it.
 };
 
 export const viewport = {
@@ -88,7 +86,7 @@ export default function RootLayout({ children }) {
       "Custom furniture, modular kitchens, wardrobes and complete interior woodwork in Bhopal, Madhya Pradesh.",
     url: baseUrl || undefined,
     image: baseUrl ? `${baseUrl}/og.png` : undefined,
-    telephone: "+91-9826025149",
+    telephone: `+91-${site.phone.replace(/^\+91/, "")}`,
     hasMap: site.mapsUrl,
     address: {
       "@type": "PostalAddress",

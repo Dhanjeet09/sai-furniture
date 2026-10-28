@@ -11,6 +11,16 @@ import office from "@/assets/office.webp";
 import InquiryForm from "./components/InquiryForm";
 import { site, whatsappLink } from "./lib/site";
 
+export const metadata = {
+  // Declared on the page rather than the layout so the 404 route keeps only
+  // the "noindex" directive Next.js adds to it.
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large" }
+  }
+};
+
 const services = [
   {
     id: "service-kitchens",
@@ -433,9 +443,9 @@ export default function Home() {
             {site.phoneDisplay}
           </a>
           <p className="contact-address">
-            C-69, Regal Homes, Near Shubhankar Gas Agency,
+            {site.address.line1}, {site.address.line2},
             <br />
-            Avadhpuri, Bhopal – 462022
+            {site.address.city} – {site.address.pincode}
           </p>
           <p className="visit-note">Please call to arrange a visit.</p>
           <div className="contact-links">

@@ -1,4 +1,4 @@
-import { navigation, site } from "@/app/lib/site";
+import { navigation, site } from "../lib/site";
 
 export default function Footer() {
   return (
@@ -18,9 +18,11 @@ export default function Footer() {
         <div className="footer-links">
           <a href={`tel:${site.phone}`}>{site.phoneDisplay}</a>
           <a href={site.mapsUrl} target="_blank" rel="noreferrer">
-            C-69, Regal Homes, Avadhpuri
+            {site.address.line1}, {site.address.area}
           </a>
-          <span>Bhopal, Madhya Pradesh 462022</span>
+          <span>
+            {site.address.city}, {site.address.state} {site.address.pincode}
+          </span>
           <span>Please call to arrange a visit.</span>
         </div>
       </div>
@@ -37,7 +39,9 @@ export default function Footer() {
       </div>
 
       <div className="footer-bottom">
-        <span>© {new Date().getFullYear()} Sai Furniture · Bhopal</span>
+        <span>
+          © {new Date().getFullYear()} {site.name} · {site.address.city}
+        </span>
         <span>Design references are illustrative; finishes are confirmed in consultation.</span>
       </div>
     </footer>

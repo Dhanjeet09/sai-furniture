@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { projectTypes, whatsappLink } from "@/app/lib/site";
+import { projectTypes, whatsappLink } from "../lib/site";
 
 export default function InquiryForm() {
   const [name, setName] = useState("");

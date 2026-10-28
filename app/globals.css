@@ -1323,6 +1323,19 @@ main [id^="service-"] {
   }
 }
 
+@media (max-width: 960px) {
+  /* Below this width the two hero buttons stop fitting on one line inside the
+     46% copy column, and the wrapped pair ends up on two rows with different
+     widths. Stacking them keeps the pair aligned; the max width stops them
+     sprawling across the full column once the hero itself goes single-column. */
+  .hero-actions {
+    align-self: stretch;
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 420px;
+  }
+}
+
 @media (max-width: 900px) {
   /* Portrait tablets: a two-column hero and contact block get too cramped,
      so both stack and the imagery runs full width. */

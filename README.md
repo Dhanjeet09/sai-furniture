@@ -16,9 +16,11 @@ npm run dev        # http://localhost:3000
 ```bash
 npm run build
 npm start          # http://localhost:3000
+npm run lint       # eslint, flat config in eslint.config.mjs
 ```
 
-Node 18.17+ is required (developed on Node 22).
+Node 20.9+ is required (developed on Node 22). The project runs on Next.js 16
+with React 19; `next build` uses Turbopack.
 
 ## Environment
 
@@ -49,9 +51,10 @@ visitor reviews and sends themselves, so no personal data is stored or emailed.
 
 ## Images
 
-Source concepts live in `tmp/image-source` (not deployed). Generated, deployable
-assets live in `assets/` as WebP and are imported statically so Next can size and
-lazy-load them.
+Source concepts live in `tmp/image-source` (git-ignored, not deployed). Generated,
+deployable assets live in `assets/` as WebP and are imported statically so Next
+can size and lazy-load them. The generated files are committed, so a fresh clone
+renders correctly without the sources.
 
 ```bash
 npm run assets
@@ -59,7 +62,9 @@ npm run assets
 
 `scripts/build-assets.mjs` crops the baked-in "completed project" badges that
 shipped with two of the source concepts, resizes to 1200–1400 px, and rebuilds
-`public/og.png` plus the app icons. Run it after replacing a source image.
+`public/og.png` (hero photo behind a brown scrim, 1200×630) plus the app icons.
+It needs the PNGs in `tmp/image-source`, so run it only when you are replacing an
+image or changing the share card.
 
 Images on the page are design references, not photographs of completed projects.
 The UI says so in the hero label, the concept note, the inspiration disclaimer

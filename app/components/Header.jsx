@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { navigation, site } from "@/app/lib/site";
+import { navigation, site } from "../lib/site";
 
 export default function Header() {
   const [open, setOpen] = useState(false);

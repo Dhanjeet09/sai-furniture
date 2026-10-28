@@ -10,6 +10,7 @@ export const site = {
     city: "Bhopal",
     state: "Madhya Pradesh",
     pincode: "462022",
+    area: "Avadhpuri",
     country: "IN"
   },
   addressOneLine:
