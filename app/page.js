@@ -157,8 +157,7 @@ export default function Home() {
       <section className="hero" aria-labelledby="hero-title">
         <div className="hero-copy">
           <p className="eyebrow">
-            Avadhpuri, Bhopal <span aria-hidden="true">·</span> Modular furniture
-            studio
+            Avadhpuri, Bhopal <span aria-hidden="true">·</span> Furniture studio
           </p>
           <h1 id="hero-title">
             Modular living,
