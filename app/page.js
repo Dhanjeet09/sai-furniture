@@ -10,6 +10,8 @@ import office from "@/assets/office.webp";
 
 import InquiryForm from "./components/InquiryForm";
 import InspirationGallery from "./components/InspirationGallery";
+import ServiceDetail from "./components/ServiceDetail";
+import CategoryDetail from "./components/CategoryDetail";
 import { site, whatsappLink } from "./lib/site";
 
 export const metadata = {
@@ -28,42 +30,54 @@ const services = [
     number: "01",
     category: "Kitchens",
     title: "Modular kitchens",
-    text: "Kitchen cabinets and storage planned around your space, cooking habits and material preferences."
+    text: "Kitchen cabinets and storage planned around your space, cooking habits and material preferences.",
+    image: kitchenHero,
+    imageAlt: "Modular kitchen with ivory cabinetry, warm timber details and a central island"
   },
   {
     id: "service-wardrobes",
     number: "02",
     category: "Storage",
     title: "Wardrobes & cabinets",
-    text: "Built-in wardrobes, bookshelves and storage furniture tailored to room dimensions."
+    text: "Built-in wardrobes, bookshelves and storage furniture tailored to room dimensions.",
+    image: wardrobeSuite,
+    imageAlt: "Full-height wardrobe with warm wood framing and glass display doors"
   },
   {
     id: "service-furniture",
     number: "03",
     category: "Living",
     title: "Furniture & TV units",
-    text: "Beds, sofas, dining tables, TV units and pooja units for your home."
+    text: "Beds, sofas, dining tables, TV units and pooja units for your home.",
+    image: tvUnit,
+    imageAlt: "TV wall unit with marble-look panel, timber shelving and warm lighting"
   },
   {
     id: "service-woodwork",
     number: "04",
     category: "Interiors",
     title: "Woodwork & finishes",
-    text: "Wooden doors, windows, wall panels, ceilings and partitions."
+    text: "Wooden doors, windows, wall panels, ceilings and partitions.",
+    image: livingTv,
+    imageAlt: "Living room showcasing timber wall panelling, shelving and a media console"
   },
   {
     id: "service-commercial",
     number: "05",
     category: "Workspaces",
     title: "Commercial furniture",
-    text: "Office furniture, reception counters and cabinets for business interiors."
+    text: "Office furniture, reception counters and cabinets for business interiors.",
+    image: office,
+    imageAlt: "Modern office with built-in cabinetry, worktops and warm wood finishes"
   },
   {
     id: "service-aluminium",
     number: "06",
     category: "Aluminium",
     title: "Aluminium work",
-    text: "Discuss your aluminium requirements, dimensions and installation needs with our team."
+    text: "Discuss your aluminium requirements, dimensions and installation needs with our team.",
+    image: wardrobeWalnut,
+    imageAlt: "Built-in wardrobe system with tall cabinet doors and display shelving"
   }
 ];
 
@@ -260,6 +274,7 @@ export default function Home() {
               data-reveal=""
               style={{ "--reveal-delay": `${index * 60}ms` }}
             >
+              <CategoryDetail category={{ ...category, title: category.title }} />
               <span className="category-image">
                 <Image
                   src={category.image}
@@ -303,6 +318,16 @@ export default function Home() {
               data-reveal=""
               style={{ "--reveal-delay": `${(index % 3) * 70}ms` }}
             >
+              <ServiceDetail service={service} />
+              <span className="service-image">
+                <Image
+                  src={service.image}
+                  alt={service.imageAlt || service.title}
+                  fill
+                  placeholder="blur"
+                  sizes="(max-width: 720px) 86vw, (max-width: 900px) 43vw, 28vw"
+                />
+              </span>
               <p className="service-kicker">
                 {service.number} / {service.category}
               </p>

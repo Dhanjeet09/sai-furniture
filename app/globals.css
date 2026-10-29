@@ -665,8 +665,8 @@ main [id^="service-"] {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  min-height: 210px;
-  padding: 34px 32px 30px;
+  min-height: 360px;
+  padding: 18px 18px 28px;
   border-right: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
   background: transparent;
@@ -675,6 +675,26 @@ main [id^="service-"] {
 
 .service-item:hover {
   background: var(--paper-warm);
+}
+
+.service-image {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1.7 / 1;
+  margin: 0 0 22px;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: var(--paper-deep);
+}
+
+.service-image img {
+  object-fit: cover;
+  transition: transform 0.6s var(--ease);
+}
+
+.service-item:hover .service-image img {
+  transform: scale(1.045);
 }
 
 .service-kicker {
@@ -1290,6 +1310,154 @@ main [id^="service-"] {
     block-size: auto;
   }
 }
+
+.service-card-trigger {
+  position: absolute;
+  z-index: 5;
+  top: 14px;
+  right: 14px;
+  padding: 6px 10px;
+  border: 1px solid rgb(255 255 255 / 70%);
+  border-radius: 999px;
+  background: rgb(46 33 26 / 72%);
+  backdrop-filter: blur(6px);
+  color: var(--white);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: background-color 0.2s var(--ease);
+}
+
+.service-dialog {
+  width: min(980px, 92vw);
+  max-height: 92vh;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  overflow: visible;
+  color: var(--ink);
+}
+
+.service-dialog::backdrop {
+  background: rgb(24 17 12 / 90%);
+  backdrop-filter: blur(8px);
+}
+
+.service-dialog-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  background: var(--paper);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.service-dialog-stage {
+  position: relative;
+  height: min(520px, 48vh);
+  background: #241a14;
+}
+
+.service-dialog-content {
+  padding: 28px 28px 28px 0;
+}
+
+.service-dialog-category {
+  margin: 0 0 8px;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.service-dialog-content h2 {
+  font-family: var(--font-display-stack);
+  font-size: clamp(26px, 2.5vw, 36px);
+  line-height: 1.1;
+  margin-bottom: 14px;
+}
+
+.service-dialog-content p {
+  max-width: 36ch;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+
+.service-dialog-note {
+  margin-top: 14px;
+  font-size: 12.5px;
+  color: var(--ink-muted);
+}
+
+.service-dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.service-dialog-close {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid rgb(240 209 180 / 30%);
+  border-radius: 50%;
+  background: rgb(46 33 26 / 90%);
+  color: var(--white);
+  backdrop-filter: blur(8px);
+}
+
+@media (max-width: 900px) {
+  .service-dialog-inner { grid-template-columns: 1fr; }
+  .service-dialog-content { padding: 20px; }
+  .service-dialog-close { top: 10px; right: 10px; }
+}
+
+.category-trigger {
+  position: absolute;
+  z-index: 4;
+  top: 12px;
+  right: 12px;
+  padding: 6px 10px;
+  border: 1px solid rgb(255 255 255 / 70%);
+  border-radius: 999px;
+  background: rgb(46 33 26 / 72%);
+  backdrop-filter: blur(6px);
+  color: var(--white);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+}
+
+.category-dialog {
+  width: min(980px, 92vw);
+  max-height: 92vh;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  overflow: visible;
+  color: var(--ink);
+}
+.category-dialog::backdrop { background: rgb(24 17 12 / 90%); backdrop-filter: blur(8px); }
+.category-dialog-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; background: var(--paper); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-lg); }
+.category-dialog-stage { position: relative; height: min(520px, 48vh); background: #241a14; }
+.category-dialog-content { padding: 28px 28px 28px 0; }
+.category-dialog-content h2 { font-family: var(--font-display-stack); font-size: clamp(26px, 2.5vw, 36px); line-height: 1.1; margin-bottom: 14px; }
+.category-dialog-content p { max-width: 36ch; font-size: 15px; line-height: 1.7; color: var(--ink-soft); }
+.category-dialog-note { margin-top: 14px; font-size: 12.5px; color: var(--ink-muted); }
+.category-dialog-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.category-dialog-close { position: absolute; top: -14px; right: -14px; width: 40px; height: 40px; padding: 0; border: 1px solid rgb(240 209 180 / 30%); border-radius: 50%; background: rgb(46 33 26 / 90%); color: var(--white); backdrop-filter: blur(8px); font-size: 14px; }
+@media (max-width: 900px) { .category-dialog-inner { grid-template-columns: 1fr; } .category-dialog-content { padding: 20px; } .category-dialog-close { top: 10px; right: 10px; } }
 
 /* Contact ----------------------------------------------------------------- */
 
