@@ -3,8 +3,9 @@
 Single-page marketing site for Sai Furniture, a custom furniture and interior
 woodwork studio in Avadhpuri, Bhopal. Built with the Next.js App Router.
 
-The page is a server component. Only the header menu and the inquiry form are
-client components, so the rest ships as static HTML.
+The page is a server component. Only the header, the inspiration gallery, the
+floating contact tools and the inquiry form are client components, so the rest
+ships as static HTML.
 
 ## Run it
 
@@ -41,13 +42,26 @@ a domain that does not exist. Set `NEXT_PUBLIC_SITE_URL` before launch.
 | --- | --- |
 | `app/lib/site.js` | Business name, owner, phone, WhatsApp number, address, maps link, navigation, project types. |
 | `app/page.js` | Every section: hero, categories, services, concept, inspiration, approach, FAQs, contact. FAQ copy is also emitted as `FAQPage` schema. |
-| `app/layout.js` | Metadata, viewport, `FurnitureStore` schema. |
-| `app/components/*` | Header, footer, inquiry form. |
+| `app/layout.js` | Metadata, viewport, `FurnitureStore` + `WebSite` schema, scroll-reveal bootstrap. |
+| `app/components/*` | Header, footer, inspiration lightbox, floating call/WhatsApp tools, inquiry form. |
+| `app/manifest.js` | Installable web-app manifest (name, theme, icons). |
 
 Edit the copy directly in these files. Nothing is fetched from a CMS.
 
 The inquiry form does not post to a server. It composes a WhatsApp message the
 visitor reviews and sends themselves, so no personal data is stored or emailed.
+
+## Features
+
+- Sticky header with scroll-spy navigation and an elevated state once scrolled.
+- Mobile Call / WhatsApp dock that hides itself over the contact section.
+- Desktop back-to-top control.
+- Inspiration gallery with a keyboard-accessible lightbox (arrow keys, Escape,
+  focus returns to the card, background scroll locked).
+- Per-service WhatsApp deep links that prefill the message.
+- Scroll reveals that respect `prefers-reduced-motion` and degrade to static
+  content when JavaScript is unavailable.
+- Web manifest with 192/512/maskable icons so the site can be installed.
 
 ## Images
 
@@ -65,6 +79,14 @@ shipped with two of the source concepts, resizes to 1200–1400 px, and rebuilds
 `public/og.png` (hero photo behind a brown scrim, 1200×630) plus the app icons.
 It needs the PNGs in `tmp/image-source`, so run it only when you are replacing an
 image or changing the share card.
+
+`scripts/build-icons.mjs` derives the manifest icons (`icon-192.png`,
+`icon-512.png`, `icon-maskable-512.png`) from `app/icon.svg`. Run it after
+changing the brand mark:
+
+```bash
+node scripts/build-icons.mjs
+```
 
 Images on the page are design references, not photographs of completed projects.
 The UI says so in the hero label, the concept note, the inspiration disclaimer

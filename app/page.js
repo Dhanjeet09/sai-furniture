@@ -9,6 +9,7 @@ import livingTv from "@/assets/living-tv.webp";
 import office from "@/assets/office.webp";
 
 import InquiryForm from "./components/InquiryForm";
+import InspirationGallery from "./components/InspirationGallery";
 import { site, whatsappLink } from "./lib/site";
 
 export const metadata = {
@@ -84,6 +85,17 @@ const steps = [
   }
 ];
 
+const planTopics = [
+  "Room measurements",
+  "Storage planning",
+  "Materials & finishes",
+  "Hardware",
+  "Lighting",
+  "Budget range",
+  "Timeline",
+  "Installation"
+];
+
 const faqs = [
   {
     question: "Where is Sai Furniture located?",
@@ -129,16 +141,33 @@ const inspirations = [
   {
     title: "Modular kitchens",
     label: "Kitchen systems",
-    image: kitchenConcept
+    image: kitchenConcept,
+    alt: "Warm timber and ivory modular kitchen with an island and pendant lighting"
   },
-  { title: "TV wall units", label: "Living systems", image: tvUnit },
-  { title: "Wardrobe systems", label: "Bedroom storage", image: wardrobeSuite },
+  {
+    title: "TV wall units",
+    label: "Living systems",
+    image: tvUnit,
+    alt: "Wall-mounted TV unit with fluted wood panelling and open display shelves"
+  },
+  {
+    title: "Wardrobe systems",
+    label: "Bedroom storage",
+    image: wardrobeSuite,
+    alt: "Full-height wardrobe suite with mirrored panels and a warm wood frame"
+  },
   {
     title: "Modular living rooms",
     label: "Living systems",
-    image: livingTv
+    image: livingTv,
+    alt: "Living room with a low media console, open shelving and warm lighting"
   },
-  { title: "Modular workspaces", label: "Office storage", image: office }
+  {
+    title: "Modular workspaces",
+    label: "Office storage",
+    image: office,
+    alt: "Office interior with built-in storage, worktops and warm wood finishes"
+  }
 ];
 
 const faqSchema = {
@@ -193,6 +222,7 @@ export default function Home() {
             alt="Warm timber and ivory modular kitchen with an island and pendant lighting"
             fill
             priority
+            fetchPriority="high"
             placeholder="blur"
             sizes="(max-width: 720px) 100vw, (max-width: 1024px) 50vw, 46vw"
           />
@@ -208,7 +238,7 @@ export default function Home() {
       </nav>
 
       <section className="category-section section-pad" aria-labelledby="category-title">
-        <div className="category-heading">
+        <div className="category-heading" data-reveal="">
           <div>
             <p className="eyebrow eyebrow-gold">Explore by space</p>
             <h2 id="category-title">
@@ -222,11 +252,13 @@ export default function Home() {
           </a>
         </div>
         <div className="category-grid">
-          {categories.map((category) => (
+          {categories.map((category, index) => (
             <a
               className="category-card"
               href="#inspiration"
               key={category.title}
+              data-reveal=""
+              style={{ "--reveal-delay": `${index * 60}ms` }}
             >
               <span className="category-image">
                 <Image
@@ -248,7 +280,7 @@ export default function Home() {
         id="services"
         aria-labelledby="services-title"
       >
-        <div className="services-heading">
+        <div className="services-heading" data-reveal="">
           <div>
             <p className="eyebrow eyebrow-gold">Thoughtfully made</p>
             <h2 id="services-title">
@@ -263,20 +295,36 @@ export default function Home() {
           </p>
         </div>
         <div className="service-list">
-          {services.map((service) => (
-            <article className="service-item" id={service.id} key={service.number}>
+          {services.map((service, index) => (
+            <article
+              className="service-item"
+              id={service.id}
+              key={service.number}
+              data-reveal=""
+              style={{ "--reveal-delay": `${(index % 3) * 70}ms` }}
+            >
               <p className="service-kicker">
                 {service.number} / {service.category}
               </p>
               <h3>{service.title}</h3>
               <p className="service-description">{service.text}</p>
+              <a
+                className="service-action"
+                href={whatsappLink(
+                  `Hello Sai Furniture, I would like to discuss ${service.title.toLowerCase()}.`
+                )}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Ask about this <span aria-hidden="true">↗</span>
+              </a>
             </article>
           ))}
         </div>
       </section>
 
       <section className="concept-section" id="concept" aria-labelledby="concept-title">
-        <div className="concept-photo">
+        <div className="concept-photo" data-reveal="">
           <Image
             src={wardrobeWalnut}
             alt="Walnut and ivory built-in wardrobe with open display shelving"
@@ -286,7 +334,7 @@ export default function Home() {
           />
           <span className="image-label">Concept visual</span>
         </div>
-        <div className="concept-copy">
+        <div className="concept-copy" data-reveal="" style={{ "--reveal-delay": "80ms" }}>
           <p className="eyebrow eyebrow-gold">Material, proportion, detail</p>
           <h2 id="concept-title">
             Your ideas.
@@ -324,7 +372,7 @@ export default function Home() {
         id="inspiration"
         aria-labelledby="inspiration-title"
       >
-        <div className="inspiration-heading">
+        <div className="inspiration-heading" data-reveal="">
           <div>
             <p className="eyebrow eyebrow-gold">A modular point of view</p>
             <h2 id="inspiration-title">
@@ -338,26 +386,7 @@ export default function Home() {
             workspaces. We tailor every layout to your room.
           </p>
         </div>
-        <div className="inspiration-grid">
-          {inspirations.map((item, index) => (
-            <article
-              className={index === 0 ? "inspiration-card feature" : "inspiration-card"}
-              key={item.title}
-            >
-              <Image
-                src={item.image}
-                alt=""
-                fill
-                placeholder="blur"
-                sizes="(max-width: 720px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              />
-              <div className="inspiration-overlay">
-                <p>{item.label}</p>
-                <h3>{item.title}</h3>
-              </div>
-            </article>
-          ))}
-        </div>
+        <InspirationGallery items={inspirations} />
         <p className="inspiration-disclaimer">
           Images on this page are visual references for design direction, not
           photographs of completed projects. Material, finish and availability
@@ -366,7 +395,7 @@ export default function Home() {
       </section>
 
       <section className="confidence-strip" aria-label="How we work">
-        <div>
+        <div data-reveal="">
           <span aria-hidden="true">01</span>
           <p>
             Designed around your
@@ -374,7 +403,7 @@ export default function Home() {
             room dimensions
           </p>
         </div>
-        <div>
+        <div data-reveal="" style={{ "--reveal-delay": "80ms" }}>
           <span aria-hidden="true">02</span>
           <p>
             Material and finish
@@ -382,7 +411,7 @@ export default function Home() {
             choices discussed clearly
           </p>
         </div>
-        <div>
+        <div data-reveal="" style={{ "--reveal-delay": "160ms" }}>
           <span aria-hidden="true">03</span>
           <p>
             Local Bhopal team for
@@ -397,25 +426,50 @@ export default function Home() {
         id="approach"
         aria-labelledby="approach-title"
       >
-        <p className="eyebrow eyebrow-gold">Start with a conversation</p>
-        <h2 id="approach-title">Let&rsquo;s plan your space.</h2>
+        <p className="eyebrow eyebrow-gold" data-reveal="">
+          Start with a conversation
+        </p>
+        <h2 id="approach-title" data-reveal="">
+          Let&rsquo;s plan your space.
+        </h2>
         <div className="steps-grid">
-          {steps.map((step) => (
-            <article className="step" key={step.number}>
+          {steps.map((step, index) => (
+            <article
+              className="step"
+              key={step.number}
+              data-reveal=""
+              style={{ "--reveal-delay": `${index * 80}ms` }}
+            >
               <p className="step-number">{step.number}</p>
               <h3>{step.title}</h3>
               <p>{step.text}</p>
             </article>
           ))}
         </div>
+        <p className="plan-topics-label" data-reveal="">
+          What we cover in the first call
+        </p>
+        <ul className="plan-topics" data-reveal="">
+          {planTopics.map((topic) => (
+            <li key={topic}>{topic}</li>
+          ))}
+        </ul>
       </section>
 
       <section className="faq-section section-pad" aria-labelledby="faq-title">
-        <p className="eyebrow eyebrow-gold">A few useful answers</p>
-        <h2 id="faq-title">Before we begin.</h2>
+        <p className="eyebrow eyebrow-gold" data-reveal="">
+          A few useful answers
+        </p>
+        <h2 id="faq-title" data-reveal="">
+          Before we begin.
+        </h2>
         <div className="faq-list">
-          {faqs.map((faq) => (
-            <details key={faq.question}>
+          {faqs.map((faq, index) => (
+            <details
+              key={faq.question}
+              data-reveal=""
+              style={{ "--reveal-delay": `${index * 50}ms` }}
+            >
               <summary>{faq.question}</summary>
               <p>{faq.answer}</p>
             </details>
@@ -428,7 +482,7 @@ export default function Home() {
         id="contact"
         aria-labelledby="contact-title"
       >
-        <div className="contact-intro">
+        <div className="contact-intro" data-reveal="">
           <p className="eyebrow eyebrow-gold">Let&rsquo;s make it yours</p>
           <h2 id="contact-title">
             Have a space
@@ -459,7 +513,13 @@ export default function Home() {
             </a>
           </div>
         </div>
-        <InquiryForm />
+        <div
+          className="contact-form-wrap"
+          data-reveal=""
+          style={{ "--reveal-delay": "100ms" }}
+        >
+          <InquiryForm />
+        </div>
       </section>
 
       <script
