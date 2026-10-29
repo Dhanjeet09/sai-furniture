@@ -1,4 +1,4 @@
-import { navigation, site } from "../lib/site";
+import { navigation, site, whatsappLink } from "../lib/site";
 
 export default function Footer() {
   return (
@@ -17,13 +17,22 @@ export default function Footer() {
         <h2 className="footer-heading">Visit or call</h2>
         <div className="footer-links">
           <a href={`tel:${site.phone}`}>{site.phoneDisplay}</a>
-          <a href={site.mapsUrl} target="_blank" rel="noreferrer">
+          <span>
             {site.address.line1}, {site.address.area}
-          </a>
+          </span>
           <span>
             {site.address.city}, {site.address.state} {site.address.pincode}
           </span>
           <span>Please call to arrange a visit.</span>
+          <a
+            href={whatsappLink(
+              "Hello Sai Furniture, I would like to ask about my project."
+            )}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Message on WhatsApp <span aria-hidden="true">↗</span>
+          </a>
         </div>
       </div>
 

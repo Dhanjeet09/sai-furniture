@@ -41,7 +41,7 @@ export const metadata = {
   authors: [{ name: site.name }],
   creator: site.name,
   publisher: site.name,
-  formatDetection: { telephone: true, address: true, email: true },
+  formatDetection: { telephone: true, address: true, email: false },
   openGraph: {
     type: "website",
     locale: "en_IN",

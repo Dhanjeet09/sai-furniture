@@ -448,9 +448,6 @@ export default function Home() {
           </p>
           <p className="visit-note">Please call to arrange a visit.</p>
           <div className="contact-links">
-            <a href={site.mapsUrl} target="_blank" rel="noreferrer">
-              Open in Google Maps <span aria-hidden="true">↗</span>
-            </a>
             <a
               href={whatsappLink(
                 "Hello Sai Furniture, I would like to ask about my project."
